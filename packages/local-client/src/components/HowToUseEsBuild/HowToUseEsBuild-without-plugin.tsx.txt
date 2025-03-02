@@ -1,0 +1,35 @@
+import { useState, useEffect } from "react";
+import startService from "./plugins/esbuild";
+
+function App() {
+  const [input, setInput] = useState("");
+  const [code, setCode] = useState(""); // transpiling
+
+  const onClick = async () => {
+    const esBuildRef = await startService();
+
+    const result = await esBuildRef.transform(input, {
+      loader: "jsx",
+      target: "es2015",
+    });
+
+    setCode(result.code);
+  };
+
+  return (
+    <div>
+      <textarea
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      ></textarea>
+      <div>
+        <button type="button" onClick={onClick}>
+          Submit
+        </button>
+      </div>
+      <pre>{code}</pre>
+    </div>
+  );
+}
+
+export default App;

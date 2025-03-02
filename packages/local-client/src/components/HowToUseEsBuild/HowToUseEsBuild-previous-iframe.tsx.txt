@@ -1,0 +1,61 @@
+import { useState } from "react";
+import startService from "./plugins/esbuild";
+import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
+import { fetchPlugin } from "./plugins/fetch-plugin";
+
+function App() {
+  const [input, setInput] = useState(`
+import React, { useState } from 'react-select';
+import 'bulma/css/bulma.css';
+
+console.log({React});
+`);
+  const [code, setCode] = useState(""); // transpiling
+
+  const onClick = async () => {
+    const esBuildRef = await startService();
+
+    const result = await esBuildRef.build({
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin(), fetchPlugin(input)],
+      define: {
+        "process.env.NODE_ENV": "'production'",
+        global: "window",
+      },
+    });
+
+    setCode(result.outputFiles[0].text);
+
+    try {
+      eval(result.outputFiles[0].text);
+    } catch (err: unknown) {
+      alert(err as string);
+    }
+  };
+
+  return (
+    <div>
+      <textarea
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      ></textarea>
+      <div>
+        <button type="button" onClick={onClick}>
+          Submit
+        </button>
+      </div>
+      <pre>{code}</pre>
+      {/* <iframe src="/test.html"></iframe> */}
+      {/* <iframe sandbox="" src="/test.html"></iframe> */}
+      {/* <iframe sandbox="allow-same-origin" src="/test.html"></iframe> */}
+      <iframe
+        sandbox="allow-same-origin"
+        src="http://nothing.localhost:5173/test.html"
+      ></iframe>
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,43 @@
+import { legacy_createStore as createStore, applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
+
+import reducers from "./reducers";
+import { persistMiddleware } from "./middlewares/persist-middleware";
+
+export const store = createStore(
+  reducers,
+  {},
+  // @ts-expect-error : using persistMiddleware triggered an issue with the type with apllyMiddleware "No overload matches this call.", but it's running correctly
+  applyMiddleware(persistMiddleware, thunk),
+);
+
+// This is the previos code which triggered the typescript issue of no overload
+// the last version is persist-middleware.ts
+//
+// export const persistMiddleware = ({
+//   dispatch,
+//   getState,
+// }: PersistMiddlewareStoreProps) => {
+//   let timer: ReturnType<typeof setTimeout>;
+//
+//   return (next: PersistMiddlewareNextProps) => {
+//     return (action: Action) => {
+//       next(action);
+//
+//       if (
+//         [
+//           ActionType.MOVE_CELL,
+//           ActionType.UPDATE_CELL,
+//           ActionType.INSERT_CELL_AFTER,
+//           ActionType.DELETE_CELL,
+//         ].includes(action.type)
+//       ) {
+//         if (timer) clearTimeout(timer);
+//
+//         timer = setTimeout(() => {
+//           saveCells()(dispatch, getState);
+//         }, 250);
+//       }
+//     };
+//   };
+// };

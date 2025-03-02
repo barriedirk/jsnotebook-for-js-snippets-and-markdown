@@ -1,0 +1,134 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* 
+
+https://unpkg.com/
+
+example:
+https://unpkg.com/react@19.0.0/index.js
+
+'use strict';
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./cjs/react.production.js');
+} else {
+  module.exports = require('./cjs/react.development.js');
+}
+
+
+// packages to test
+https://unpkg.com/tiny-test-pkg
+https://unpkg.com/medium-test-pkg
+https://unpkg.com/nested-test-pkg
+
+----
+
+https://unpkg.com/tiny-test-pkg@1.0.0/index.js
+module.exports = 'hi there!';
+
+
+https://unpkg.com/medium-test-pkg@1.0.0/index.js
+const toUpperCase = require('./utils');
+
+const message = 'hi there';
+
+module.exports = toUpperCase(message);
+
+
+https://unpkg.com/nested-test-pkg
+const toUpperCase = require('./helpers/utils');
+
+const message = 'hi there';
+
+module.exports = toUpperCase(message);
+
+
+*/
+
+import * as esbuild from "esbuild-wasm";
+import axios from "axios";
+
+export const unpkgPathPlugin = () => {
+  return {
+    name: "unpkg-path-plugin",
+    setup(build: esbuild.PluginBuild) {
+      build.onResolve({ filter: /.*/ }, async (args: any) => {
+        console.log("onResolve", args);
+
+        if (args.path === "index.js") {
+          return { path: args.path, namespace: "a" };
+        }
+
+        if (args.path.includes("./") || args.path.includes("../")) {
+          // return {
+          //   namespace: "a",
+          //   path: new URL(args.path, args.importer + "/").href,
+          // };
+          return {
+            namespace: "a",
+            path: new URL(
+              args.path,
+              "https://unpkg.com" + args.resolveDir + "/",
+            ).href,
+          };
+        }
+
+        return {
+          namespace: "a",
+          path: `https://unpkg.com/${args.path}`,
+        };
+      });
+
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+        console.log("onLoad", args);
+
+        if (args.path === "index.js") {
+          // return {
+          //   loader: "jsx",
+          //   contents: `
+          //     const message = required('nested-test-pkg');
+
+          //     console.log(message);
+          //   `,
+          // };
+
+          // return {
+          //   loader: "jsx",
+          //   contents: `
+          //     const react = required('react');
+          //     const reactDom = require('react-dom');
+
+          //     console.log({react, reactDOM});
+          //   `,
+          // };
+
+          // return {
+          //   loader: "jsx",
+          //   contents: `
+          //     import React, { useState } from 'react@16.0.0';
+
+          //     console.log({React});
+          //   `,
+          // };
+          return {
+            loader: "jsx",
+            contents: `
+              import React, { useState } from 'react@16.0.0';
+
+              console.log({React});
+            `,
+          };
+        }
+
+        const { data, request } = await axios.get(args.path);
+        // console.log(request);
+
+        return {
+          loader: "jsx",
+          contents: data,
+          resolveDir: new URL("./", request.responseURL).pathname,
+        };
+      });
+    },
+  };
+};

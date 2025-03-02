@@ -1,0 +1,65 @@
+{
+  "name": "@notebook-app-inline-markdown-jscode-snippets/local-client",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "public": {
+    "access": "public"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "serve": "node local-api.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@monaco-editor/react": "^4.7.0-rc.0",
+    "@uiw/react-md-editor": "^4.0.5",
+    "ajv": "^8.17.1",
+    "axios": "^1.7.9",
+    "bulmaswatch": "^0.8.1",
+    "esbuild-wasm": "^0.24.2",
+    "immer": "^10.1.1",
+    "jscodeshift": "^17.1.2",
+    "localforage": "^1.10.0",
+    "monaco-editor": "0.52.2",
+    "monaco-jsx-highlighter": "^2.77.77",
+    "prettier": "^3.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "react-resizable": "^3.0.5",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
+    "web-vitals": "^4.2.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^29.5.14",
+    "@types/jscodeshift": "^0.12.0",
+    "@types/node": "^22.13.1",
+    "@types/prettier": "^3.0.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/react-redux": "^7.1.34",
+    "@types/react-resizable": "^3.0.8",
+    "@types/redux": "^3.6.0",
+    "@eslint/js": "^9.19.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.22.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
+    "vite": "^6.1.0"
+  }
+}

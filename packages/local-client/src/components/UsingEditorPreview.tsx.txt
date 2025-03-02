@@ -1,0 +1,43 @@
+import "bulmaswatch/superhero/bulmaswatch.min.css";
+
+import { useState } from "react";
+
+import CodeEditor from "./CodeEditor/CodeEditor";
+import Preview from "./Preview/Preview";
+
+import bundle from "../blunder";
+
+function EditorPreview() {
+  const [code, setCode] = useState("");
+  const [input, setInput] = useState(`
+import React from 'react';
+import { createRoot } from "react-dom/client";
+import 'bulma/css/bulma.css';
+
+const App = () => <h1>Hi There</h1>;
+const root = createRoot(document.getElementById('root'));
+
+root.render(<App />);
+
+`);
+
+  const onClick = async () => {
+    const output = await bundle(input);
+
+    setCode(output);
+  };
+
+  return (
+    <div>
+      <CodeEditor initialValue={input} onChange={(value) => setInput(value)} />
+      <div>
+        <button type="button" onClick={onClick}>
+          Submit
+        </button>
+      </div>
+      <Preview code={code} />
+    </div>
+  );
+}
+
+export default EditorPreview;

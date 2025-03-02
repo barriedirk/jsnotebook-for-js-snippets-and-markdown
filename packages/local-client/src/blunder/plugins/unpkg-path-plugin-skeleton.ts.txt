@@ -1,0 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* 
+
+https://unpkg.com/
+
+example:
+https://unpkg.com/react@19.0.0/index.js
+
+'use strict';
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./cjs/react.production.js');
+} else {
+  module.exports = require('./cjs/react.development.js');
+}
+
+*/
+
+import * as esbuild from "esbuild-wasm";
+
+export const unpkgPathPlugin = () => {
+  return {
+    name: "unpkg-path-plugin",
+    setup(build: esbuild.PluginBuild) {
+      
+      build.onResolve({ filter: /.*/ }, async (args: any) => {
+        console.log("onResolve", args);
+        return { path: args.path, namespace: "a" };
+      });
+
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+        console.log("onLoad", args);
+
+        if (args.path === "index.js") {
+          return {
+            loader: "jsx",
+            contents: `
+              import message from 'tiny-test-pkg';
+
+              console.log(message);
+            `,
+          };
+        }
+      });
+    },
+  };
+};

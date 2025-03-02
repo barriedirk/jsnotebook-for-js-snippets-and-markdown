@@ -1,0 +1,60 @@
+import "./MDTextEditor.css";
+
+import { useState, useEffect, useRef } from "react";
+import MDEditor from "@uiw/react-md-editor";
+
+
+const MDTextEditor: React.FC<MDTextEditorProps> = () => {
+  const [editing, setEditing] = useState(false);
+  const [markdownValue, setMarkdownValue] = useState<string | undefined>(
+    "# Header ",
+  );
+  const refEditingMD = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      if (
+        refEditingMD.current &&
+        event.target &&
+        refEditingMD.current.contains(event.target as Node)
+      ) {
+        // element clicked on is inside editor
+        return;
+      }
+
+      setEditing(false);
+    };
+
+    document.addEventListener("click", listener, { capture: true });
+
+    return () => {
+      document.removeEventListener("click", listener, { capture: true });
+    };
+  }, []);
+
+  if (editing) {
+    return (
+      <div className="text-editor" ref={refEditingMD}>
+        <MDEditor
+          value={markdownValue}
+          onChange={(newValue) => setMarkdownValue(newValue ?? "")}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="text-editor card"
+      onClick={() => {
+        setEditing(true);
+      }}
+    >
+      <div className="card-content">
+        <MDEditor.Markdown source={markdownValue} />
+      </div>
+    </div>
+  );
+};
+
+export default MDTextEditor;

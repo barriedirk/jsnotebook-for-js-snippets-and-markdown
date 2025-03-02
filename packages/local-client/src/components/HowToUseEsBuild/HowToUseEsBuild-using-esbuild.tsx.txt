@@ -1,0 +1,52 @@
+import * as esbuild from "esbuild-wasm";
+
+import { useState, useEffect } from "react";
+import startService from "./plugins/esbuild";
+
+function App() {
+  const [input, setInput] = useState("");
+  const [code, setCode] = useState(""); // transpiling
+
+  useEffect(() => {
+    try {
+      esbuild.build({});
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("initialize")) {
+        esbuild.initialize({
+          worker: true,
+          wasmURL: "/esbuild.wasm",
+        });
+      } else {
+        throw error;
+      }
+    }
+  }, []);
+
+  const onClick = () => {
+    esbuild
+      .transform(input, {
+        loader: "jsx",
+        target: "es2015",
+      })
+      .then((result) => {
+        setCode(result.code);
+      });
+  };
+
+  return (
+    <div>
+      <textarea
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      ></textarea>
+      <div>
+        <button type="button" onClick={onClick}>
+          Submit
+        </button>
+      </div>
+      <pre>{code}</pre>
+    </div>
+  );
+}
+
+export default App;

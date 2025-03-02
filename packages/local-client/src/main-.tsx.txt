@@ -1,0 +1,27 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+
+import * as esbuild from "esbuild-wasm";
+
+try {
+  esbuild.build({});
+} catch (error) {
+  if (error instanceof Error && error.message.includes("initialize")) {
+    esbuild.initialize({
+      worker: true,
+      wasmURL: "/esbuild.wasm",
+    });
+  } else {
+    throw error;
+  }
+}
+
+import App from "./App.tsx";
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);

@@ -1,0 +1,42 @@
+import { useState, useEffect } from "react";
+
+import CodeEditor from "../CodeEditor/CodeEditor";
+import Preview from "../Preview/Preview";
+import Resizable from "../Resisable/Resizable";
+
+import bundle from "../../blunder";
+
+const CodeCell: React.FC<CodeCellProps> = () => {
+  const [code, setCode] = useState("");
+  const [err, setErr] = useState("");
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const output = await bundle(input);
+
+      setCode(output.code);
+      setErr(output.err);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [input]);
+
+  return (
+    <Resizable direction="vertical">
+      <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
+        <Resizable direction="horizontal">
+          <CodeEditor
+            initialValue={input}
+            onChange={(value) => setInput(value)}
+          />
+        </Resizable>
+        <Preview code={code} bundlingStatus={err} />
+      </div>
+    </Resizable>
+  );
+};
+
+export default CodeCell;
