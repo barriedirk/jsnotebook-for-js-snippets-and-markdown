@@ -142,6 +142,9 @@ note: not working. the solution is adding a flag as this "--external:@notebook-a
 
 
 
+$ lerna publish --no-push
+
+
 ```
 
 
