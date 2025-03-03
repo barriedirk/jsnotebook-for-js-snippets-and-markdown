@@ -160,6 +160,10 @@ lerna info Assuming all packages changed
   Custom Version
 
 
+if not failed, you can execute
+
+$ npx notebook-app-inline-markdown-jscode-snippets
+
 ```
 
 

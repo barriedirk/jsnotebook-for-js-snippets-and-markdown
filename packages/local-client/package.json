@@ -1,6 +1,5 @@
 {
   "name": "@notebook-app-inline-markdown-jscode-snippets/local-client",
-  "private": true,
   "version": "3.0.0",
   "files": [
     "dist"
