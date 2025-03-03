@@ -1,6 +1,6 @@
 {
   "name": "@notebook-app-inline-markdown-jscode-snippets/local-api",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "",
   "files": [
     "dist"
@@ -24,7 +24,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@notebook-app-inline-markdown-jscode-snippets/local-client": "^3.0.1",
+    "@notebook-app-inline-markdown-jscode-snippets/local-client": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "http-proxy-middleware": "^3.0.3"
