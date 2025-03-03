@@ -159,10 +159,47 @@ lerna info Assuming all packages changed
   Custom Prerelease
   Custom Version
 
+Successfully published:
+ - @notebook-app-inline-markdown-jscode-snippets/local-api@3.0.2
+ - @notebook-app-inline-markdown-jscode-snippets/local-client@3.0.2
+ - notebook-app-inline-markdown-jscode-snippets@3.0.2
+lerna success published 3 packages
+
 
 if not failed, you can execute
 
 $ npx notebook-app-inline-markdown-jscode-snippets
+
+$ npm view notebook-app-inline-markdown-jscode-snippets
+
+
+
+
+
+To execute
+
+$ sudo npm install -g notebook-app-inline-markdown-jscode-snippets
+
+added 306 packages in 4s
+
+139 packages are looking for funding
+  run `npm fund` for details
+❯ npx notebook-app-inline-markdown-jscode-snippets
+Usage: notebook-app-inline-markdown-jscode-snippets [options] [command]
+
+Options:
+  -h, --help                  display help for command
+
+Commands:
+  serve [options] [filename]  Open a file for editing
+  help [command]              display help for command
+❯ npx notebook-app-inline-markdown-jscode-snippets serve
+Opened notebook.js. Navigate to:
+
+http://localhost:4005/
+
+ to edit the file.
+
 
 ```
 
