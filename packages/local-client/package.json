@@ -61,5 +61,6 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
     "vite": "^6.1.0"
-  }
+  },
+  "gitHead": "7b329ce6e8546c1fd40d23bf73bf4f2d12edefe6"
 }

@@ -145,6 +145,21 @@ note: not working. the solution is adding a flag as this "--external:@notebook-a
 $ lerna publish --no-push
 
 
+info cli using local version of lerna
+lerna notice cli v8.2.0
+lerna info current version 0.0.0
+lerna info Assuming all packages changed
+? Select a new version (currently 0.0.0)
+  Patch (0.0.1)
+  Minor (0.1.0)
+❯ Major (1.0.0)
+  Prepatch (0.0.1-alpha.0)
+  Preminor (0.1.0-alpha.0)
+  Premajor (1.0.0-alpha.0)
+  Custom Prerelease
+  Custom Version
+
+
 ```
 
 
