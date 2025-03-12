@@ -1,0 +1,13 @@
+.splash-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+}
+
+.splash-wrapper img {
+  width: auto;
+  height: 200px;
+}

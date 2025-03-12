@@ -1,8 +1,10 @@
 import express from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
 import path from "path";
 
+import { createProxyMiddleware } from "http-proxy-middleware";
+
 import { createCellsRouter } from "./routes/cells";
+import { createFileNotebooksRouter } from "./routes/notebooks";
 
 export const serve = (
   port: number,
@@ -13,6 +15,7 @@ export const serve = (
   const app = express();
 
   app.use(createCellsRouter(filename, dir));
+  app.use(createFileNotebooksRouter(filename, dir));
 
   // two ways to call react app
   if (useProxy) {

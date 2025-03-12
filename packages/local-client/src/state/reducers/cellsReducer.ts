@@ -1,7 +1,7 @@
 import { produce } from "immer";
-import { ActionType } from "../action-types";
-import { Action } from "../actions";
-import { Cell } from "../cell";
+import { ActionType } from "@state/action-types";
+import { Action } from "@state/actions";
+import { Cell } from "@state/cell";
 
 interface CellsState {
   loading: boolean;
@@ -18,8 +18,6 @@ const initialState: CellsState = {
   order: [],
   data: {},
 };
-
-const randomId = () => Math.random().toString(36).substr(2, 5);
 
 const reducer = produce((state: CellsState = initialState, action: Action) => {
   switch (action.type) {
@@ -79,7 +77,7 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       const cell: Cell = {
         content: "",
         type: action.payload.type,
-        id: randomId(),
+        id: crypto.randomUUID(),
       };
 
       state.data[cell.id] = cell;

@@ -1,38 +1,40 @@
-import { useTypedSelector } from "./useTypedSelector";
+import { useTypedSelector } from "@hooks/useTypedSelector";
 
 const showFuncNoop = "var show = () => {}";
 
 const showFunc = `
-        // See bundler/index.ts
-        //  jsxFactory: "_React.createElement",
-        //  jsxFragment: "_React.Fragment",
+/*
+ * See bundler/index.ts
+ *  jsxFactory: "_React.createElement",
+ *  jsxFragment: "_React.Fragment",
+*/
+import _React from 'react';
+import { createRoot as _createRootNode } from "react-dom/client";
 
-        import _React from 'react';
-        import { createRoot as _createRootNode } from "react-dom/client";
+var show = (value) => {
+  const $root = document.querySelector('#root');
 
+  if (typeof value === 'object') {
 
-        var show = (value) => {
-          const $root = document.querySelector('#root');
+    if (value.$$typeof && value.props) {
 
-          if (typeof value === 'object') {
+      const rootNode = _createRootNode($root);
 
-            if (value.$$typeof && value.props) {
+      rootNode.render(value);
 
-             const rootNode = _createRootNode($root);
+      /*
+       * ReactDOM.render is deprecated
+       * exa: ReactDOM.render(value, $root);
+       */ 
+    } else {
+      $root.innerHTML = JSON.stringify(value);
+    }
 
-             rootNode.render(value);
+  } else {
+    $root.innerHTML = value;
+  }
 
-              // ReactDOM.render is deprecated
-              // ReactDOM.render(value, $root);
-            } else {
-              $root.innerHTML = JSON.stringify(value);
-            }
-
-          } else {
-            $root.innerHTML = value;
-          }
-
-        };
+};
 `;
 
 export const useCumulativeCode = (cellId: string) => {

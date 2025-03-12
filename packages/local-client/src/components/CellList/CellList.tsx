@@ -2,25 +2,34 @@ import "./CellList.css";
 
 import { Fragment, FC, useEffect } from "react";
 
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "@hooks/useTypedSelector";
+import { useActions } from "@hooks/useActions";
 
+import AddCell from "@components/AddCell/AddCell";
 import CellListItem from "./CellListItem";
-import AddCell from "../AddCell/AddCell";
-
-import { useActions } from "../../hooks/useActions";
+import SelectNotebook from "./SelectNotebook";
 
 const CellList: FC = () => {
-  const cells = useTypedSelector(({ cells }) => {
+  const { fetchCells } = useActions();
+  const { cells, activeFileId } = useTypedSelector(({ cells, notebooks }) => {
     const { order, data } = cells!;
 
-    return order.map((id) => data[id]);
+    return {
+      activeFileId: notebooks!.fileNotebooks?.activeFileId,
+      cells: order.map((id) => data[id]),
+    };
   });
 
-  const { fetchCells } = useActions();
-
   useEffect(() => {
-    fetchCells();
-  }, []);
+    if (activeFileId) {
+      fetchCells();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFileId]);
+
+  if (!activeFileId) {
+    return <SelectNotebook />;
+  }
 
   const renderedCells = cells.map((cell) => (
     <Fragment key={cell.id}>

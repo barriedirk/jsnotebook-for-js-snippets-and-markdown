@@ -1,6 +1,6 @@
 import * as esbuild from "esbuild-wasm";
 
-import startService from "./plugins/esbuild";
+import { AsyncEsBuild } from "./plugins/esbuild";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 
@@ -12,7 +12,7 @@ interface bundleResult {
 }
 
 const bundle = async (rawCode: string): Promise<bundleResult> => {
-  if (!esBuildRef) esBuildRef = await startService();
+  if (!esBuildRef) esBuildRef = await AsyncEsBuild.getInstance();
 
   try {
     const result = await esBuildRef.build({

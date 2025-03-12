@@ -2,16 +2,15 @@ import "./CodeCell.css";
 
 import { useEffect } from "react";
 
-import CodeEditor from "../CodeEditor/CodeEditor";
-import Preview from "../Preview/Preview";
-import Resizable from "../Resisable/Resizable";
+import CodeEditor from "@components/CodeEditor/CodeEditor";
+import Preview from "@components/Preview/Preview";
+import Resizable from "@components/Resisable/Resizable";
 
-import { Cell } from "../../state";
+import { Cell } from "@state/index";
 
-import { useActions } from "../../hooks/useActions";
-
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useCumulativeCode } from "../../hooks/useCumulativeCode";
+import { useActions } from "@hooks/useActions";
+import { useTypedSelector } from "@hooks/useTypedSelector";
+import { useCumulativeCode } from "@hooks/useCumulativeCode";
 
 interface CodeCellProps {
   cell: Cell;

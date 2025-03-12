@@ -21,7 +21,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@blunder/*":["src/blunder/*"],
+      "@components/*":["src/components/*"],
+      "@hooks/*":["src/hooks/*"],
+      "@state/*":["src/state/*"],
+      "@/*": ["src/*"]
+    }
 
   },
-  "include": ["src"]
+  "include": ["src"],
 }

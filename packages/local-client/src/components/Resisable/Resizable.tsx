@@ -16,7 +16,7 @@ const Resizable: React.FC<ResizableProps> = ({ direction, children }) => {
   let resizableProps: ResizableBoxProps;
 
   useEffect(() => {
-    let timer: any;
+    let timer: ReturnType<typeof setTimeout>;
 
     const listener = () => {
       if (timer) clearTimeout(timer);

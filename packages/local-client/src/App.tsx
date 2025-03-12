@@ -1,15 +1,22 @@
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bulmaswatch/superhero/bulmaswatch.min.css";
+import { useEffect } from "react";
 
-import { Provider } from "react-redux";
-import { store } from "./state";
+import { useActions } from "@hooks/useActions";
 
-import CellList from "./components/CellList/CellList";
+import Header from "@components/Header/Header";
+import CellList from "@components/CellList/CellList";
 
 export default function App() {
+  const { fetchNotebooks } = useActions();
+
+  useEffect(() => {
+    fetchNotebooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <Provider store={store}>
+    <>
+      <Header />
       <CellList />
-    </Provider>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import startService from "./plugins/esbuild";
+import { startService } from "./plugins/esbuild";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 

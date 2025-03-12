@@ -1,15 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 import "bulmaswatch/superhero/bulmaswatch.min.css";
 
 import { useRef, useState } from "react";
-import startService from "../../blunder/plugins/esbuild";
+import { startService } from "../../blunder/plugins/esbuild";
 import { unpkgPathPlugin } from "../../blunder/plugins/unpkg-path-plugin";
 import { fetchPlugin } from "../../blunder/plugins/fetch-plugin";
 import CodeEditor from "../CodeEditor/CodeEditor";
 
 function HowToUseEsBuild() {
-  const iframe = useRef<any>(undefined);
+  const iframe = useRef<HTMLIFrameElement>(null);
   const [input, setInput] = useState(`
 import React from 'react';
 import { createRoot } from "react-dom/client";
@@ -25,7 +23,7 @@ root.render(<App />);
   const onClick = async () => {
     const esBuildRef = await startService();
 
-    iframe.current.srcdoc = html;
+    iframe.current!.srcdoc = html;
 
     const result = await esBuildRef.build({
       entryPoints: ["index.js"],
@@ -39,7 +37,7 @@ root.render(<App />);
     });
 
     // setCode(result.outputFiles[0].text);
-    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, "*");
+    iframe.current!.contentWindow!.postMessage(result.outputFiles[0].text, "*");
   };
 
   const html = `

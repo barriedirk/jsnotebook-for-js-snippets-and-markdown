@@ -3,14 +3,29 @@ import "./syntax.css";
 
 import { useRef } from "react";
 
+/* Note:
+ * I have installed monaco-editor, only to get this property and using
+ * correctly the typing, if you don't case about using <any>
+ * in const editorRef = useRef<any>, you don't need to install this packages
+ */
+import { editor } from "monaco-editor";
 import MonacoEditor, { OnChange, OnMount } from "@monaco-editor/react";
 
 import prettier from "prettier/standalone";
 import parserBabel from "prettier/plugins/babel";
 import estreeParser from "prettier/plugins/estree";
 
-import codeShift from "jscodeshift";
-import Highlighter from "monaco-jsx-highlighter";
+const options: editor.IStandaloneEditorConstructionOptions = {
+  wordWrap: "on",
+  minimap: { enabled: false },
+  showUnused: false,
+  folding: false,
+  lineNumbersMinChars: 3,
+  fontSize: 16,
+  scrollBeyondLastLine: false,
+  automaticLayout: true,
+  tabSize: 2,
+};
 
 interface CodeEditorProps {
   initialValue: string;
@@ -18,29 +33,20 @@ interface CodeEditorProps {
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
-  const editorRef = useRef<any>(undefined);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(undefined);
 
-  const onMountEditor: OnMount = (editor) => {
+  const onMountEditor: OnMount = (
+    editor: editor.IStandaloneCodeEditor,
+    monaco: typeof import("monaco-editor"),
+  ) => {
     editorRef.current = editor;
 
-    // @todo, fix issue with those libraries used inside of the try
     try {
-      const highlighter = new Highlighter(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        window.monaco,
-        codeShift,
-        editor,
-      );
+      const model = editor.getModel();
 
-      highlighter.highLightOnDidChangeModelContent(100);
-      highlighter.addJSXCommentCommand();
-      // highlighter.highLightOnDidChangeModelContent(
-      //   () => {},
-      //   () => {},
-      //   undefined,
-      //   () => {},
-      // );
+      if (monaco && editorRef.current && model) {
+        monaco.editor.setModelLanguage(model, "javascript");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +60,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
     if (!editorRef.current) return;
 
     try {
-      const unformatted = editorRef.current.getModel().getValue();
+      const unformatted = editorRef.current!.getModel()!.getValue();
 
       const formatted = await prettier
         .format(unformatted, {
@@ -87,17 +93,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
         language="javascript"
         height="100%"
         onMount={onMountEditor}
-        options={{
-          wordWrap: "on",
-          minimap: { enabled: false },
-          showUnused: false,
-          folding: false,
-          lineNumbersMinChars: 3,
-          fontSize: 16,
-          scrollBeyondLastLine: false,
-          automaticLayout: true,
-          tabSize: 2,
-        }}
+        options={options}
       />
     </div>
   );

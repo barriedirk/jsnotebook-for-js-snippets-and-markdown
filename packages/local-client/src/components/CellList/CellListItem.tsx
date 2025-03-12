@@ -1,10 +1,10 @@
 import "./CellListItem.css";
 
-import { Cell } from "../../state";
+import { Cell } from "@state/index";
 
-import CodeCell from "../CodeCell/CodeCell";
-import MDTextEditor from "../MDTextEditor/MDTextEditor";
-import ActionBar from "../ActionBar/ActionBar";
+import CodeCell from "@components/CodeCell/CodeCell";
+import MDTextEditor from "@components/MDTextEditor/MDTextEditor";
+import ActionBar from "@components/ActionBar/ActionBar";
 
 interface CellListItemProps {
   cell: Cell;

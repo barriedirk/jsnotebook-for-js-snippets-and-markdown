@@ -1,5 +1,6 @@
-import { ActionType } from "../action-types";
-import { Cell, CellTypes } from "../cell";
+import { ActionType } from "@state/action-types";
+import { Cell, CellTypes } from "@state/cell";
+import { Notebook } from "@state/notebook";
 
 export type Direction = "up" | "down";
 
@@ -69,6 +70,49 @@ export interface SaveCellsErrorAction {
   payload: string;
 }
 
+export interface InitialNotebook {
+  type: ActionType.INITIAL_NOTEBOOK;
+  payload: {
+    activeFileId: string | undefined;
+    files: Notebook[];
+  };
+}
+
+export interface ErrorNotebook {
+  type: ActionType.ERROR_NOTEBOOK;
+  payload: string;
+}
+
+export interface CreateNotebook {
+  type: ActionType.CREATE_NOTEBOOK;
+  payload: {
+    newNotebook: Notebook;
+    files: Notebook[];
+  };
+}
+
+export interface DeleteNotebook {
+  type: ActionType.DELETE_NOTEBOOK;
+  payload: {
+    activeFileId: string | null | undefined;
+    files: Notebook[];
+  };
+}
+
+export interface SetNotebook {
+  type: ActionType.ACTIVE_NOTEBOOK;
+  payload: string; // fileId
+}
+
+export interface UpdateNotebookTitle {
+  type: ActionType.UPDATE_NOTEBOOK_TITLE;
+  payload: Notebook[];
+}
+
+export interface LoadingNotebook {
+  type: ActionType.LOADING_NOTEBOOK;
+}
+
 export type Action =
   | MoveCellAction
   | DeleteCellAction
@@ -79,4 +123,11 @@ export type Action =
   | FetchCellsAction
   | FethCellsCompleteAction
   | FetchCellsErrorAction
-  | SaveCellsErrorAction;
+  | InitialNotebook
+  | ErrorNotebook
+  | SaveCellsErrorAction
+  | LoadingNotebook
+  | CreateNotebook
+  | DeleteNotebook
+  | SetNotebook
+  | UpdateNotebookTitle;

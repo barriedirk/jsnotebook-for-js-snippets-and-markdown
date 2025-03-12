@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import startService from "./plugins/esbuild";
+import { startService } from "./plugins/esbuild";
 
 function App() {
   const [input, setInput] = useState("");

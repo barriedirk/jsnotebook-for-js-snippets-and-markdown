@@ -1,14 +1,23 @@
+import "@/index.css";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bulmaswatch/superhero/bulmaswatch.min.css";
+
 import { StrictMode, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 
-import startService from "./blunder/plugins/esbuild.ts";
+import { Provider } from "react-redux";
+import { store } from "@state/index";
 
-// @todo, to improve, the issue is
-// when there are more than one text code which call at the same time the function startService
+import { AsyncEsBuild } from "@blunder/plugins/esbuild.ts";
+
+import ErrorBoundary from "@components/ErrorBoundary/ErrorBoundary.tsx";
+import Loading from "@components/Splash/Splash.tsx";
+
 const App = lazy(async () => {
   const App = import("./App.tsx");
 
-  await startService();
+  await AsyncEsBuild.getInstance();
 
   return App;
 });
@@ -17,8 +26,12 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
   <StrictMode>
-    <Suspense fallback={<div>Loading</div>}>
-      <App />,
-    </Suspense>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <Suspense fallback={<Loading />}>
+          <App />
+        </Suspense>
+      </Provider>
+    </ErrorBoundary>
   </StrictMode>,
 );

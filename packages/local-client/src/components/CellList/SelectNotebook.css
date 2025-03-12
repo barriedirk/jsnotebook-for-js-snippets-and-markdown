@@ -1,0 +1,16 @@
+.wrapper-select-notebook {
+  min-height: 50dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.wrapper-select-notebook h2 {
+  font-size: 24px;
+}
+
+.wrapper-select-notebook img {
+  max-width: 200px;
+}

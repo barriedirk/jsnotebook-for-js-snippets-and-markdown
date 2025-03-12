@@ -1,6 +1,9 @@
 import express from "express";
 import fs from "fs/promises";
+
 import path from "path";
+
+import { PREFIX_FILE } from "../utils/constants";
 
 interface Cell {
   id: string;
@@ -17,12 +20,27 @@ const isLocalApiError = (err: any): err is LocalApiError => {
 };
 
 export const createCellsRouter = (filename: string, dir: string) => {
-  const fullPath = path.join(dir, filename);
+  // const fullPath = path.join(dir, filename);
   const router = express.Router();
 
   router.use(express.json());
 
   router.get("/cells", async (req, res) => {
+    const activeFileId = req.headers["activefileid"];
+
+    console.log("Received Custom Header:", activeFileId);
+
+    if (!activeFileId) {
+      res.status(404).send({ status: "Missing Header activefileid " });
+
+      return;
+    }
+
+    const fullPath = path.join(
+      dir,
+      `${PREFIX_FILE}-${activeFileId}-${filename}`
+    );
+
     try {
       // Read the file
       const result = await fs.readFile(fullPath, { encoding: "utf-8" });
@@ -53,17 +71,32 @@ export const createCellsRouter = (filename: string, dir: string) => {
   });
 
   router.post("/cells", async (req, res) => {
+    const activeFileId = req.headers["activefileid"];
+
+    console.log("Received Custom Header:", activeFileId);
+
+    if (!activeFileId) {
+      res.status(404).send({ status: "Missing Header activefileid " });
+
+      return;
+    }
+
+    const fullPath = path.join(
+      dir,
+      `${PREFIX_FILE}-${activeFileId}-${filename}`
+    );
+
     // Take the list of cells from the request obk
     // serialize them
     const { cells }: { cells: Cell[] } = req.body;
 
     if (!cells) {
-      res.send({ status: "failed" });
+      res.status(404).send({ status: "failed" });
 
       return;
     }
 
-    console.log("cells", cells);
+    console.log("post cells", { activeFileId, cells });
 
     // Write the cells into the file
     await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8");

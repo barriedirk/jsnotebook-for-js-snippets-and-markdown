@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
-import { Action } from "../actions";
-import { ActionType } from "../action-types";
-import { saveCells } from "../action-creators";
-import { RootState } from "../reducers";
+import { Action } from "@state/actions";
+import { ActionType } from "@state/action-types";
+import { saveCells } from "@state/action-creators";
+import { RootState } from "@state/reducers";
 
 import { ThunkMiddleware } from "redux-thunk";
 

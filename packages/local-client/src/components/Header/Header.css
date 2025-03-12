@@ -1,0 +1,51 @@
+.header-notebook {
+  padding: 5px;
+  margin: 5px 25px 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.header-logo {
+  width: auto;
+  height: 50px;
+}
+
+.header-new-notebook,
+.header-select,
+.header-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.header-input input {
+  min-width: 250px;
+}
+
+.header-select select {
+  min-width: 350px;
+}
+
+.header-notebook input,
+.header-notebook select {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.fa-spinner {
+  font-size: 50px;
+  color: #d16318;
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

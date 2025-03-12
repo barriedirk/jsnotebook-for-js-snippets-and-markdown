@@ -13,7 +13,7 @@ export const serveCommand = new Command()
   .command("serve [filename]")
   .description("Open a file for editing")
   .option("-p, --port <number>", "port to run serve on", "4005")
-  .action(async (filename = "notebook.js", options: { port: string }) => {
+  .action(async (filename = "workbook.json", options: { port: string }) => {
     const isLocalApiError = (err: any): err is LocalApiError => {
       return typeof err.code === "string";
     };
@@ -29,7 +29,7 @@ export const serveCommand = new Command()
       );
 
       console.log(
-        `Opened ${filename}. Navigate to: \n\nhttp://localhost:${options.port}/\n\n to edit the file.`
+        `Opened "file-list-notebooks-${filename}".\n\n Navigate to: \n\nhttp://localhost:${options.port}/\n\n to edit the file.\n\nIn this folder, the app will create some json files, one it's the list of the notebooks and the other is the notebook code/text`
       );
     } catch (err) {
       if (isLocalApiError(err)) {

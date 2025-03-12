@@ -9,4 +9,11 @@ export enum ActionType {
   FETCH_CELLS_COMPLETE = "fetch_cells_complete",
   FETCH_CELLS_ERROR = "fetch_cells_error",
   SAVE_CELLS_ERROR = "save_cells_errors",
+  INITIAL_NOTEBOOK = "initial_notebook",
+  ERROR_NOTEBOOK = "error_notebook",
+  LOADING_NOTEBOOK = "loading_notebook",
+  CREATE_NOTEBOOK = "create_notebook",
+  DELETE_NOTEBOOK = "delete_notebook",
+  ACTIVE_NOTEBOOK = "active_notebook",
+  UPDATE_NOTEBOOK_TITLE = "update_notebook_title",
 }
