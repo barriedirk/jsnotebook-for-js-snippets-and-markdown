@@ -152,6 +152,7 @@ const Header = () => {
           <i className="fa fa-spinner"></i>
         </div>
       )}
+      {error && (<div><p className="error">Check error: {error}</p></div>)}
     </header>
   );
 };
