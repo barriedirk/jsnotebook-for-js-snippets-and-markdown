@@ -1,6 +1,6 @@
 {
   "name": "notebook-app-inline-markdown-jscode-snippets",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "App where you can add markdown text and/or execute javascript code snippets",
   "bin": "dist/index.js",
   "publishConfig": {
@@ -17,10 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@notebook-app-inline-markdown-jscode-snippets/local-client": "^3.0.2"
+    "@notebook-app-inline-markdown-jscode-snippets/local-client": "^3.0.3"
   },
   "devDependencies": {
-    "@notebook-app-inline-markdown-jscode-snippets/local-api": "^3.0.2",
+    "@notebook-app-inline-markdown-jscode-snippets/local-api": "^3.0.3",
     "@types/node": "^22.13.5",
     "commander": "^13.1.0",
     "esbuild": "0.24.2",
