@@ -168,4 +168,4 @@ This is the app in your browser
 
 Note:
 
-If you review the project, you will notice that there are some file with extension ts.txt, etc. It's because during the course, those files are modified and I don't want to lost the previous change to compare later.
+If you review the project, you will notice that there are some files with extension like ts.txt, etc. It's because during the course, those files are modified and I don't want to lost the previous change to compare later.
