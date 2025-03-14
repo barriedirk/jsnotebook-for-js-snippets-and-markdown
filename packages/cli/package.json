@@ -2,6 +2,10 @@
   "name": "notebook-app-inline-markdown-jscode-snippets",
   "version": "3.0.5",
   "description": "App where you can add markdown text and/or execute javascript code snippets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barriedirk/jsnotebook-for-js-snippets-and-markdown"
+  },
   "bin": "dist/index.js",
   "publishConfig": {
     "access": "public"
