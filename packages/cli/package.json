@@ -1,6 +1,6 @@
 {
   "name": "notebook-app-inline-markdown-jscode-snippets",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "App where you can add markdown text and/or execute javascript code snippets",
   "repository": {
     "type": "git",
