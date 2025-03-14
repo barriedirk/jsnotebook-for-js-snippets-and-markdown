@@ -64,7 +64,7 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-## download from github repository 
+## Download from this github
 
 clone or download this repository in your machine,
 the structure project is the following:
@@ -159,7 +159,13 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-
+---
 
 This is the app in your browser
 ![Booknote App](screenshot.png)
+
+---
+
+Note:
+
+If you review the project, you will notice that there are some file with extension ts.txt, etc. It's because during the course, those files are modified and I don't want to lost the previous change to compare later.
