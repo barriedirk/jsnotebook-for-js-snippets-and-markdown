@@ -1,13 +1,41 @@
-This is a coure I followed from [udemy](https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project/)
+This is a course I followed from [udemy](https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project/)
 
-Where you can build an app where you can execute js snippets online in your browser like code pen and add markdown note and group them as a notebook. 
+Where you can build an notebook app where you can execute js snippets online in your browser like codepen and add markdown notes and group them into a file. 
 
 The notebook is saved in your machine in a file using express and node.
 
 The technology used are node, express, react and lerna to manipulate them as a monorepos and publish them into npm packages
 
+Two ways to execute this project
+
+### execute it via npm packages
+
+The package is located on [https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets](https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets)
+
+
+
 ```shell
-$ sudo npm install -g notebook-app-inline-markdown-jscode-snippets
+
+# using npx
+
+$ npx notebook-app-inline-markdown-jscode-snippets@latest serve
+
+Opened "file-list-notebooks-workbook.json".
+
+ Navigate to:
+
+http://localhost:4005/
+
+ to edit the file.
+
+In this folder, the app will create some json files, one it's the list of the notebooks and the other is the notebook code/text
+
+```
+
+# install via npm
+
+```shell
+$ sudo npm install -g notebook-app-inline-markdown-jscode-snippets@latest
 
 added 306 packages in 4s
 
@@ -22,7 +50,8 @@ Options:
 Commands:
   serve [options] [filename]  Open a file for editing
   help [command]              display help for command
-❯ npx notebook-app-inline-markdown-jscode-snippets serve
+$ notebook-app-inline-markdown-jscode-snippets serve
+
 Opened "file-list-notebooks-workbook.json".
 
  Navigate to:
@@ -35,7 +64,8 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-Note:
+# download from github repository 
 
-There was some differences about this code and the code of the course, the course use create-react-app and some old packages and I updated those packages and use vite for react
+```
 
+```

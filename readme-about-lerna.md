@@ -205,5 +205,3 @@ Note:
 I've modified the project to add a header to select or create a individual notebook. For that reason, the folder will contain a json with the list of the notebooks created and each notebook has its own file
 
 ```
-
-
