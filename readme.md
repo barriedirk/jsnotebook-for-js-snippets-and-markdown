@@ -6,9 +6,9 @@ The notebook is saved in your machine in a file using express and node.
 
 The technology used are node, express, react and lerna to manipulate them as a monorepos and publish them into npm packages
 
-Two ways to execute this project
+Three ways to execute this project
 
-## execute it via npm packages
+## Execute it via npm packages
 
 The package is located on [https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets](https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets)
 
@@ -32,7 +32,7 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-## install via npm
+## Install via npm
 
 ```shell
 $ sudo npm install -g notebook-app-inline-markdown-jscode-snippets@latest
@@ -161,7 +161,8 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ---
 
-This is the app in your browser
+This is the app in your browser:
+
 ![Booknote App](screenshot.png)
 
 ---
