@@ -8,7 +8,7 @@ The technology used are node, express, react and lerna to manipulate them as a m
 
 Two ways to execute this project
 
-### execute it via npm packages
+## execute it via npm packages
 
 The package is located on [https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets](https://www.npmjs.com/package/notebook-app-inline-markdown-jscode-snippets)
 
@@ -32,7 +32,7 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-# install via npm
+## install via npm
 
 ```shell
 $ sudo npm install -g notebook-app-inline-markdown-jscode-snippets@latest
@@ -64,8 +64,102 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-# download from github repository 
+## download from github repository 
+
+clone or download this repository in your machine,
+the structure project is the following:
+
+``` 
+$ tree -L 2
+.
+├── lerna-debug.log
+├── lerna.json
+├── package-lock.json
+├── package.json
+├── packages
+│   ├── cli
+│   ├── local-api
+│   ├── local-client
+├── readme-about-lerna.md
+├── readme.md
+├── screenshot.png
 
 ```
 
+You need to install the packages and open two terminals to execute 
+
+```shell
+# install the packages
+$ npm install 
 ```
+
+
+### 1st terminal
+```shell
+# in the main folder, execute
+$ npm run start
+
+> start
+> lerna run start --parallel
+
+lerna notice cli v8.2.0
+
+ Lerna (powered by Nx)   Running target start for 3 projects:
+
+- notebook-app-inline-markdown-jscode-snippets
+- @notebook-app-inline-markdown-jscode-snippets/local-api
+- @notebook-app-inline-markdown-jscode-snippets/local-client
+
+
+> @notebook-app-inline-markdown-jscode-snippets/local-client:start
+
+
+> @notebook-app-inline-markdown-jscode-snippets/local-api:start
+
+
+> notebook-app-inline-markdown-jscode-snippets:start
+
+> @notebook-app-inline-markdown-jscode-snippets/local-client@3.0.4 start
+> vite
+> notebook-app-inline-markdown-jscode-snippets@3.0.4 start
+> tsc --watch --preserveWatchOutput
+> @notebook-app-inline-markdown-jscode-snippets/local-api@3.0.4 start
+> tsc --watch --preserveWatchOutput
+2:24:49 PM - Starting compilation in watch mode...
+2:24:49 PM - Starting compilation in watch mode...
+✘ vite v6.1.0 is not yet supported in the Community edition of Console Ninja.
+We are working hard on it for you https://tinyurl.com/3h9mtwra.
+Estimated release dates:
+  - Community users: around 4th April, 2025 (subject to team availability)
+  - PRO users:       priority access is available now
+2:24:50 PM [vite] (client) Re-optimizing dependencies because lockfile has changed
+  VITE v6.1.0  ready in 274 ms
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+2:24:50 PM - Found 0 errors. Watching for file changes.
+2:24:50 PM - Found 0 errors. Watching for file changes.
+```
+
+
+### 2nd terminal
+```shell
+$ cd packages/cli/dist
+$ node index.js serve
+
+Opened "file-list-notebooks-workbook.json".
+
+ Navigate to:
+
+http://localhost:4005/
+
+ to edit the file.
+
+In this folder, the app will create some json files, one it's the list of the notebooks and the other is the notebook code/text
+
+```
+
+
+
+This is the app in your browser
+![Booknote App](screenshot.png)
