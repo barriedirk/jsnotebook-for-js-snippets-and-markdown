@@ -64,7 +64,7 @@ In this folder, the app will create some json files, one it's the list of the no
 
 ```
 
-## Download from this github
+## Download from my own github
 
 clone or download this repository in your machine,
 the structure project is the following:
