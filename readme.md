@@ -1,10 +1,20 @@
 This is a course I followed from [udemy](https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project/)
 
+I extended the application and update some packages, for example, the original used "create react app" which is deprecated. In my project I use vite. The original only save one notebook, I have added the ability to save more than one. 
+
 Where you can build an notebook app where you can execute js snippets online in your browser like codepen and add markdown notes and group them into a file. 
 
-The notebook is saved in your machine in a file using express and node.
+The notebooks are saved in your machine in a file using express and node.
 
 The technology used are node, express, react and lerna to manipulate them as a monorepos and publish them into npm packages
+
+There are three projects:
+
+* cli, where via line command, we can invoke the web app (via local-api) and indicate the parameters that will used to create the files json to save the information.
+
+* local-api, where via express, we invoke the react web app. When it's invoke in dev environment, we use a proxy middleware to the react app which is running via vite. Othercase, use static files of the react app build. And via routes, creates the json flles to save the data.
+
+* local-client, it's the react web app.
 
 Three ways to execute this project
 
